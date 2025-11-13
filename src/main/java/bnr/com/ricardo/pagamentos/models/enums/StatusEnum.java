@@ -1,4 +1,4 @@
-package bnr.com.ricardo.pagamentos.entity;
+package bnr.com.ricardo.pagamentos.models.enums;
 
 public enum StatusEnum {
     CRIADO(0, "Criado"),

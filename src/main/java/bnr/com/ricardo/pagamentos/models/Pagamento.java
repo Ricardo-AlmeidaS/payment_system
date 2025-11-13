@@ -1,11 +1,11 @@
-package bnr.com.ricardo.pagamentos.entity;
+package bnr.com.ricardo.pagamentos.models;
 
+import bnr.com.ricardo.pagamentos.models.enums.StatusEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Singular;
 
 import java.math.BigDecimal;
 
