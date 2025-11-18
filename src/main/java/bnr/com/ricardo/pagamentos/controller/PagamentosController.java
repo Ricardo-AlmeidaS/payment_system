@@ -20,6 +20,10 @@ public class PagamentosController {
 
     private PagamentoService pagamentoService;
 
+    public PagamentosController(PagamentoService pagamentoService) {
+        this.pagamentoService = pagamentoService;
+    }
+
     @GetMapping
     public Page<PagamentoDto> listar(@PageableDefault(size = 10) Pageable paginacao) {
         return pagamentoService.obterTodos(paginacao);

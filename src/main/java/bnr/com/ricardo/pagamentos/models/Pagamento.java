@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "pagamento")
+@Table(name = "pagamentos")
 public class Pagamento {
 
     @Id
@@ -56,6 +56,6 @@ public class Pagamento {
     private Long pedidoId;
 
     @NotNull
-    @Column(name = "forma_pagamento_id")
+    @Column(name = "forma_de_pagamento_id")
     private Long formaPagamentoId;
 }
