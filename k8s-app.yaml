@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: richasfood-app-service
+spec:
+  type: LoadBalancer # Permite acessar via localhost:8080
+  selector:
+    app: richasfood-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: richasfood-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: richasfood-app
+  template:
+    metadata:
+      labels:
+        app: richasfood-app
+    spec:
+      containers:
+        - name: richasfood-app
+          image: richasfood-app:v1
+          imagePullPolicy: Never # IMPORTANTE: Diz pro K8s usar a imagem local
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              # Note que usamos "postgres-service" que é o nome do Service do banco
+              value: jdbc:postgresql://postgres-service:5432/richasfood
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+              value: org.hibernate.dialect.PostgreSQLDialect
